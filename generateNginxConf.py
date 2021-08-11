@@ -7,6 +7,8 @@ import nginxfmt
     本程序用来生成公司的nginx配置文件，目前功能仅实现了根据url生成upstream 和location块。
 '''
 # 从url.txt文件中获取url的字符串 url-->url_list
+
+
 def getUrl():
     url_list = []
     try:
@@ -45,25 +47,23 @@ def praseUrl(url):
 
 def generateUpstream(t):
     upstream_str = "upstream "
-    server_str = "server "
+    server_str = ""
+    server_r = ""
     upstream_str_list = []
-    r_upstream_single = "\n"
-    r_upstream_multi = "\n"
+    server_r_multi = ""
+    server_r_single = ""
+    r_upstream = ''
 
     for dirname, socket_list in t.items():
-        if len(socket_list) == 1:
-            temp = upstream_str + dirname + \
-                '{' + '\n' + server_str + socket_list[0] + ';' + '}' + '\n'
-            r_upstream_single = r_upstream_single + temp
+        upstream_head = upstream_str + dirname + '{' + '\n'
+        if len(socket_list) > 1:
+            for s in socket_list:
+                server_r = "server " + s + ';\n' +server_r
 
-        else:
-            for i in socket_list:
-                server_str = "server " + i + ';\n' + server_str
-            server_str = server_str[0:-8]
-            temp = upstream_str + dirname + \
-                '{' + '\n' + server_str + '}' + '\n'
-            r_upstream_multi = r_upstream_multi + temp
-    r_upstream = r_upstream_single+r_upstream_multi
+        elif len(socket_list) == 1:
+            server_r = "server " +socket_list[0] + ';\n'
+        temp_upstream = upstream_head +  server_r + '}'
+        r_upstream += temp_upstream
     return r_upstream
 
 
