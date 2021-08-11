@@ -47,13 +47,14 @@ def generateUpstream(t):
     upstream_str = "upstream "
     server_str = "server "
     upstream_str_list = []
-    r_upstream = "\n"
+    r_upstream_single = "\n"
+    r_upstream_multi = "\n"
 
     for dirname, socket_list in t.items():
         if len(socket_list) == 1:
             temp = upstream_str + dirname + \
                 '{' + '\n' + server_str + socket_list[0] + ';' + '}' + '\n'
-            r_upstream = r_upstream + temp
+            r_upstream_single = r_upstream_single + temp
 
         else:
             for i in socket_list:
@@ -61,8 +62,8 @@ def generateUpstream(t):
             server_str = server_str[0:-8]
             temp = upstream_str + dirname + \
                 '{' + '\n' + server_str + '}' + '\n'
-            r_upstream = r_upstream + temp
-
+            r_upstream_multi = r_upstream_multi + temp
+    r_upstream = r_upstream_single+r_upstream_multi
     return r_upstream
 
 
