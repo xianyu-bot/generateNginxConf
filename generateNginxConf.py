@@ -1,11 +1,12 @@
 import re
 import os
 from nginxConf_template import *
+import nginxfmt
 
 ''' 
     本程序用来生成公司的nginx配置文件，目前功能仅实现了根据url生成upstream 和location块。
 '''
-
+# 从url.txt文件中获取url的字符串 url-->url_list
 def getUrl():
     url_list = []
     try:
@@ -90,7 +91,9 @@ def writeNginxConf(str_nginx_conf):
 
 
 def formatNginxConf(str_nginx_conf):
-    pass
+    f = nginxfmt.Formatter()
+    formatted_text = f.format_string(str_nginx_conf)
+    return formatted_text
 
 
 url = getUrl()
@@ -105,6 +108,6 @@ str_upstream = generateUpstream(t)
 str_location = generateLocation(t)
 str_nginx_conf = jointNginxConf(
     str_upstream, str_location, str_nginx_conf_head, str_nginx_conf_content, str_nginx_conf_tail)
-writeNginxConf(str_nginx_conf)
 
-print(str_nginx_conf)
+str_nginx_conf = formatNginxConf(str_nginx_conf)
+writeNginxConf(str_nginx_conf)

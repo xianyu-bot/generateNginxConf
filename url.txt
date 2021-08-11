@@ -1,3 +1,8 @@
 http://192.168.104.213:8084/jcxmjd
 http://192.168.104.239:8080/jclhys
 http://192.168.104.238:8080/jclhys
+http://10.1.126.21:8080/SmartSiteAPI
+http://10.1.126.21:8081/site-brain
+http://10.1.126.21:8082/smart-site
+http://10.1.126.22:8080/IOTWebService
+http://10.1.126.22:8080/IOTWebServiceListener
