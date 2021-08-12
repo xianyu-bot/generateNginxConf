@@ -5,6 +5,8 @@ import nginxfmt
 
 ''' 
     本程序用来生成公司的nginx配置文件，目前功能仅实现了根据url生成upstream 和location块。
+    版本：v0.1
+    作者：咸鱼-bot
 '''
 # 从url.txt文件中获取url的字符串 url-->url_list
 
