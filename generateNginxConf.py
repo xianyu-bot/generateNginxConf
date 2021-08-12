@@ -68,7 +68,7 @@ def generateUpstream(t):
 
 
 def generateLocation(t):
-    location_str_head = "location "
+    location_str_head = "location /"
     location_str_proxy = "proxy_pass   http://"
     r_location_str = ""
 
