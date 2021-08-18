@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 from nginxConf_template import *
 import nginxfmt
 
@@ -24,7 +25,7 @@ def getUrl():
         f.close()
 
     except print("Can not open file"):
-        exit()
+        sys.exit()
     return url_list
 
 
@@ -60,11 +61,11 @@ def generateUpstream(t):
         upstream_head = upstream_str + dirname + '{' + '\n'
         if len(socket_list) > 1:
             for s in socket_list:
-                server_r = "server " + s + ';\n' +server_r
+                server_r = "server " + s + ';\n' + server_r
 
         elif len(socket_list) == 1:
-            server_r = "server " +socket_list[0] + ';\n'
-        temp_upstream = upstream_head +  server_r + '}'
+            server_r = "server " + socket_list[0] + ';\n'
+        temp_upstream = upstream_head + server_r + '}'
         r_upstream += temp_upstream
     return r_upstream
 
@@ -101,10 +102,6 @@ def formatNginxConf(str_nginx_conf):
 
 url = getUrl()
 
-# url = ["http://192.168.104.213:8084/jcxmjd",
-#        "http://192.168.104.239:8080/jclhys",
-#        "http://192.168.104.238:8080/jclhys",
-#        "http://192.168.104.233:8080/jclhys"]
 t = praseUrl(url)
 
 str_upstream = generateUpstream(t)
