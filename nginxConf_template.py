@@ -73,7 +73,6 @@ str_nginx_conf_content = '''
 
         location /appurl {
                 proxy_pass     http://epointjweb;
-                ##############添加对websocket的配置支持
                 #proxy_http_version 1.1;
                 #proxy_set_header Upgrade $http_upgrade;
                 #proxy_set_header Connection "upgrade";

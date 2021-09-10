@@ -38,7 +38,7 @@ def praseUrl(url):
         url = url.replace('\n', '')
         socket = re.search(
             r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
-        dir_name = (url[7:].split("/", 2))[1]  # 获取dirname
+        dir_name = url.strip('http://').split('/',1)[1] # 获取dirname
         if dir_name in upstream_dict:
             upstream_dict[dir_name].append(socket)
         else:
@@ -74,11 +74,14 @@ def generateLocation(t):
     location_str_head = "location /"
     location_str_proxy = "proxy_pass   http://"
     r_location_str = ""
+    location_str = "location /{dirname}  {{proxy_pass http://{dirname};}}"
 
     for dirname in t:
-        r_location_str = '      ' + location_str_head + dirname + '{'\
-            + '\n' + '      ' + location_str_proxy + dirname + ';' + '\n' + '       ' + \
-            '}' + '\n' + '      ' + r_location_str
+        temp_location = location_str.format(dirname=dirname)
+        r_location_str += temp_location
+        # r_location_str = '      ' + location_str_head + dirname + '{'\
+        #     + '\n' + '      ' + location_str_proxy + dirname + ';' + '\n' + '       ' + \
+        #     '}' + '\n' + '      ' + r_location_str
     return r_location_str
 
 
