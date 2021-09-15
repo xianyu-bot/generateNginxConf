@@ -38,7 +38,7 @@ def praseUrl(url):
         url = url.replace('\n', '')
         socket = re.search(
             r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
-        dir_name = url.strip('http://').split('/',1)[1] # 获取dirname
+        dir_name = url.strip().replace('http://','').split('/',1)[1] # 获取dirname
         if dir_name in upstream_dict:
             upstream_dict[dir_name].append(socket)
         else:
@@ -56,16 +56,22 @@ def generateUpstream(t):
     server_r_multi = ""
     server_r_single = ""
     r_upstream = ''
-
+    temp = "upstream {dirname} {{  {server_str} }}"
     for dirname, socket_list in t.items():
-        upstream_head = upstream_str + dirname + '{' + '\n'
+        # upstream_head = upstream_str + dirname + '{' + '\n'
         if len(socket_list) > 1:
             for s in socket_list:
-                server_r = "server " + s + ';\n' + server_r
+                # server_r = "server " + s + ';\n' + server_r
+                server_str += "server {s};\n".format(s=s)
+            temp_upstream = temp.format(dirname=dirname, server_str=server_str)
+
 
         elif len(socket_list) == 1:
-            server_r = "server " + socket_list[0] + ';\n'
-        temp_upstream = upstream_head + server_r + '}'
+            server_str_single = "server {s};\n".format(s=socket_list[0])
+            # server_r = "server " + socket_list[0] + ';\n'
+            temp_upstream = temp.format(dirname=dirname, server_str=server_str_single)
+
+        # temp_upstream = upstream_head + server_r + '}'
         r_upstream += temp_upstream
     return r_upstream
 
