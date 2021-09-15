@@ -1,2 +1,2 @@
-http://192.168.152.18:8080/IOTWebService/apc
-http://192.168.152.19:8082/SmartSiteAPI/ssss
+http://10.100.188.39:8005/epoint-gateway
+http://10.100.188.42:8004/edctask
