@@ -35,13 +35,10 @@ def praseUrl(url: list) -> dict:
     socket_list = []
     dir_name_list = []
     upstream_dict = {}
-
     for url in url:
         url = url.replace('\n', '')
-        socket = re.search(
-            r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
-        dir_name = url.strip().replace(
-            'http://', '').split('/', 1)[1]  # 获取dirname
+        socket = re.search(r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
+        dir_name = url.strip().replace('http://', '').split('/', 1)[1]  # 获取dirname
         if dir_name in upstream_dict:
             upstream_dict[dir_name].append(socket)
         else:
@@ -89,7 +86,7 @@ def jointNginxConf(str_upstream: str, str_location: str,
 
 
 def writeNginxConf(str_nginx_conf: str):
-    file_write = open("nginx.conf", mode="w")
+    file_write = open("nginx.conf", mode="w", encoding='utf8')
     file_write.write(str_nginx_conf)
     file_write.close()
 
