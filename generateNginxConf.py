@@ -80,6 +80,7 @@ def generateLocation(t: dict) -> str:
 def jointNginxConf(str_upstream: str, str_location: str,
                    str_nginx_conf_head: str, str_nginx_conf_content: str,
                    str_nginx_conf_tail: str) -> str:
+    """ 拼接nginx的配置文件 """
     str_nginx_conf = str_nginx_conf_head + str_upstream + \
         str_nginx_conf_content + str_location + str_nginx_conf_tail
     return str_nginx_conf
@@ -92,6 +93,7 @@ def writeNginxConf(str_nginx_conf: str):
 
 
 def formatNginxConf(str_nginx_conf:str):
+    """ 调用nginxfmt格式化nginx的配置文件 """
     f = nginxfmt.Formatter()
     formatted_text = f.format_string(str_nginx_conf)
     return formatted_text
