@@ -1,32 +1,15 @@
 import re
 import os
 import sys
-from nginxConf_template import *
-import nginxfmt
-
-''' 
-    本程序用来生成公司的nginx配置文件，目前功能仅实现了根据url生成upstream 和location块。
-    版本：v0.1
-    作者：咸鱼-bot
-'''
-# 从url.txt文件中获取url的字符串 url-->url_list
+from generatenginxconf.nginxconf_template import *
+from generatenginxconf import nginxfmt
+    
 
 
-def getUrl() -> list:
-    ''' 从文件中获取url的列表 '''
+def getUrl(url_str:str)->list:
     url_list = []
-    try:
-        f = open("url.txt")
-        while True:
-            url = f.readline()
-            url.strip()
-            if not url:
-                break
-            url_list.append(url)
-        f.close()
-
-    except print("Can not open file"):
-        sys.exit()
+    url_str = url_str.strip()
+    url_list = url_str.split("\n")
     return url_list
 
 
@@ -35,10 +18,13 @@ def praseUrl(url: list) -> dict:
     socket_list = []
     dir_name_list = []
     upstream_dict = {}
+
     for url in url:
         url = url.replace('\n', '')
-        socket = re.search(r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
-        dir_name = url.strip().replace('http://', '').split('/', 1)[1]  # 获取dirname
+        socket = re.search(
+            r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
+        dir_name = url.strip().replace(
+            'http://', '').split('/', 1)[1]  # 获取dirname
         if dir_name in upstream_dict:
             upstream_dict[dir_name].append(socket)
         else:
@@ -80,7 +66,6 @@ def generateLocation(t: dict) -> str:
 def jointNginxConf(str_upstream: str, str_location: str,
                    str_nginx_conf_head: str, str_nginx_conf_content: str,
                    str_nginx_conf_tail: str) -> str:
-    """ 拼接nginx的配置文件 """
     str_nginx_conf = str_nginx_conf_head + str_upstream + \
         str_nginx_conf_content + str_location + str_nginx_conf_tail
     return str_nginx_conf
@@ -92,21 +77,22 @@ def writeNginxConf(str_nginx_conf: str):
     file_write.close()
 
 
-def formatNginxConf(str_nginx_conf:str):
-    """ 调用nginxfmt格式化nginx的配置文件 """
+def formatNginxConf(str_nginx_conf: str):
     f = nginxfmt.Formatter()
     formatted_text = f.format_string(str_nginx_conf)
     return formatted_text
 
 
-url = getUrl()
+def startConf(url_str:str):
+    url = getUrl(url_str)
+    t = praseUrl(url)
+    str_upstream = generateUpstream(t)
+    str_location = generateLocation(t)
+    str_nginx_conf = jointNginxConf(
+        str_upstream, str_location, str_nginx_conf_head, str_nginx_conf_content, str_nginx_conf_tail)
 
-t = praseUrl(url)
+    str_nginx_conf = formatNginxConf(str_nginx_conf)
+    # writeNginxConf(str_nginx_conf)
+    # print(str_nginx_conf)
+    return str_nginx_conf
 
-str_upstream = generateUpstream(t)
-str_location = generateLocation(t)
-str_nginx_conf = jointNginxConf(
-    str_upstream, str_location, str_nginx_conf_head, str_nginx_conf_content, str_nginx_conf_tail)
-
-str_nginx_conf = formatNginxConf(str_nginx_conf)
-writeNginxConf(str_nginx_conf)

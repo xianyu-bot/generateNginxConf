@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/monokai-sublime.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
+</head>
+
+<body>
+    <div class="title">
+        <h2>nginx配置文件生成测试</h2>
+    </div>
+    <div class="container-fluid">
+        <div class="row main">
+            <div class="col-md-5 nav">
+                <form method="post" id="url_post_form">
+                    <div class="form-group">
+                        <label for="url_str">请输入url：</label>
+                        <textarea name="url_str" form="url_post_form" class="form-control">请在此处输入url...</textarea>
+                        <input type="submit" value="确认提交" class="form-control submit">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5 content">
+                <div class="content-body"><p>生成的nginx配置文件</p></div>
+            
+            <div id="code" class="code-box">
+                <pre>
+                            <code>
+{{ str_nginx_conf|safe }}
+                            </code>
+                        </pre>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    // 实现代码高亮的函数
+    hljs.initHighlightingOnLoad();
+    var allpre = document.getElementsByTagName("pre");
+    for (i = 0; i < allpre.length; i++) {
+        var onepre = document.getElementsByTagName("pre")[i];
+        var mycode = document.getElementsByTagName("pre")[i].innerHTML;
+        onepre.innerHTML = '<code id="mycode">' + mycode + '</code>';
+    }
+</script>
+
+</html>

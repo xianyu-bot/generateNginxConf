@@ -1,0 +1,173 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font: 12px/1.5 tahoma, arial, \5b8b\4f53;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: couriernew, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*布局CSS代码*/
+
+body,
+html {
+    background: #EAEEF2;
+    width: 100%;
+    height: 100%;
+    color: lightblue;
+}
+
+.container-fluid {
+    background: aquamarine;
+    height: 100%;
+}
+
+.title {
+    background: black;
+    font-size: 40px;
+    /* padding-left: 20px; */
+    text-align: center;
+    height: 60px;
+    min-height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.nav {
+    background: white;
+    font-size: 30px;
+    height: 100%;
+    width: 50%;
+    float: left;
+    position: relative;
+    /* margin-right: -100%; */
+    box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+    height: 100%;
+    width: 50%;
+    /* margin-left: 15%; */
+}
+
+.content-body {
+    padding-left: 15px;
+    padding-right: 15px;
+    background: white;
+    height: 60px;
+    font-size: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+.main {
+    background: #F8F8F8;
+    height: 100%;
+    padding-top: 68px;
+    padding-bottom: 6px;
+}
+
+.submit {
+    color: green;
+}
