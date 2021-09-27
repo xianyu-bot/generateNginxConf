@@ -69,15 +69,6 @@ str_nginx_conf_content = '''
             root   html;
         }
 
-
-
-        location /appurl {
-                proxy_pass     http://epointjweb;
-                #proxy_http_version 1.1;
-                #proxy_set_header Upgrade $http_upgrade;
-                #proxy_set_header Connection "upgrade";
-        }
-
         location /epoint_base_status {
                     auth_basic "epointsafe";
                     auth_basic_user_file /usr/local/nginx/conf/htpasswd;
