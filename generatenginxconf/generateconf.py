@@ -25,6 +25,7 @@ def praseUrl(url: list) -> dict:
             r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
         dir_name = url.strip().replace(
             'http://', '').split('/', 1)[1]  # 获取dirname
+
         if dir_name in upstream_dict:
             upstream_dict[dir_name].append(socket)
         else:
@@ -36,20 +37,17 @@ def praseUrl(url: list) -> dict:
 
 def generateUpstream(t: dict) -> str:
     ''' 生成nginx配置文件中upstream块 '''
-    server_str = ""
-    server_r_single = ""
     r_upstream = ''
     temp = "upstream {dirname} {{  {server_str} }}"
-    for dirname, socket_list in t.items():
-        if len(socket_list) > 1:
-            for s in socket_list:
-                server_str += "server {s};\n".format(s=s)
-            temp_upstream = temp.format(dirname=dirname, server_str=server_str)
-        elif len(socket_list) == 1:
-            server_str_single = "server {s};\n".format(s=socket_list[0])
-            temp_upstream = temp.format(
-                dirname=dirname, server_str=server_str_single)
-        r_upstream += temp_upstream
+    server_str = "server {socket} ;\n"
+    for dirname in t:
+        temp_str = ""
+        for i in t[dirname]:
+            server = server_str.format(socket=i)
+            temp_str += server
+        temp_stream = temp.format(dirname=dirname,server_str=temp_str)
+        r_upstream = r_upstream + temp_stream
+        
     return r_upstream
 
 
