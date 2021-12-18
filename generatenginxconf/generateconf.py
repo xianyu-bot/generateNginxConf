@@ -15,8 +15,6 @@ def getUrl(url_str:str)->list:
 
 def praseUrl(url: list) -> dict:
     ''' 遍历url，生成dirname和socket字典 '''
-    socket_list = []
-    dir_name_list = []
     upstream_dict = {}
 
     for url in url:

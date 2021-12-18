@@ -10,7 +10,11 @@ def index():
     str_nginx_conf = "This is template"
     if request.method == 'POST':
         url_str = request.form.get('url_str')
-        str_nginx_conf = startConf(url_str)
+        project_type = request.form.get('project_type')
+        if project_type == "非电子交易" :
+            str_nginx_conf = startConf(url_str)
+        else:
+            pass
 
     
     return render_template('index.html', str_nginx_conf=str_nginx_conf)
