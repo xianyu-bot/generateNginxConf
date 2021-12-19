@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,url_for,redirect,flash
-from generatenginxconf.generateconf import startConf
+from generatenginxconf.generateconf import startConf, ztbStartConf
 
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ def index():
         if project_type == "非电子交易" :
             str_nginx_conf = startConf(url_str)
         else:
-            pass
+            str_nginx_conf = ztbStartConf(url_str)
 
     
     return render_template('index.html', str_nginx_conf=str_nginx_conf)
