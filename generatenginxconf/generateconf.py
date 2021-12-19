@@ -62,7 +62,7 @@ def ztbGenerateLocation(t: dict) -> str:
     location_str = "location /{dirname}  {{proxy_pass http://{dirname};}}"
     for dirname in t:
         if dirname == "TPFrame":
-            location_str = '''location /TPFrame {
+            temp_location_str = '''location /TPFrame {
             proxy_connect_timeout 75s;
             proxy_read_timeout 120s;
             proxy_send_timeout 120s;
@@ -81,7 +81,7 @@ def ztbGenerateLocation(t: dict) -> str:
             proxy_send_timeout 12s; #配置点3
         }'''
         elif dirname == "TPBidder":
-            location_str = '''        location /TPBidder {
+            temp_location_str = '''        location /TPBidder {
             proxy_connect_timeout 75s;
             proxy_read_timeout 120s;
             proxy_send_timeout 120s;
@@ -97,7 +97,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "EpointWebService":
-            location_str = '''        location /EpointWebService {
+            temp_location_str = '''        location /EpointWebService {
             proxy_connect_timeout 75s;
             proxy_read_timeout 120s;
             proxy_send_timeout 120s;
@@ -105,7 +105,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "ZtbFileWebServerJava":
-            location_str = '''        location /ZtbFileWebServerJava {
+            temp_location_str = '''        location /ZtbFileWebServerJava {
             proxy_connect_timeout 75s;
             proxy_read_timeout 120s;
             proxy_send_timeout 120s;
@@ -113,7 +113,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "BSTool":
-            location_str = '''        location /BSTool {
+            temp_location_str = '''        location /BSTool {
             proxy_connect_timeout 600s;
             proxy_read_timeout 600s;
             proxy_send_timeout 600s;
@@ -121,7 +121,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "TPPingBiao":
-            location_str = '''        #评标系统
+            temp_location_str = '''        #评标系统
 	    location /TPPingBiao {
             proxy_connect_timeout 600s;
             proxy_read_timeout 600s;
@@ -141,7 +141,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "EpointBid_JingJia":
-            location_str = '''        location /EpointBid_JingJia {
+            temp_location_str = '''        location /EpointBid_JingJia {
             proxy_pass     http://EpointBid_JingJia;
         }
         location /EpointBid_JingJia/websocket {
@@ -154,7 +154,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "BidOpening":
-            location_str = '''        location /BidOpening {
+            temp_location_str = '''        location /BidOpening {
             proxy_connect_timeout 600s;
             proxy_read_timeout 600s;
             proxy_send_timeout 600s;
@@ -173,7 +173,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "BidOpeningHall":
-            location_str = '''        location /BidOpeningHall {
+            temp_location_str = '''        location /BidOpeningHall {
             proxy_connect_timeout 600s;
             proxy_read_timeout 600s;
             proxy_send_timeout 600s;
@@ -191,7 +191,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "EpointWebBuilder":
-            location_str = '''        #网站大师
+            temp_location_str = '''        #网站大师
     	location /EpointWebBuilder {
             proxy_pass http://EpointWebBuilder;
             proxy_redirect off;
@@ -210,7 +210,7 @@ def ztbGenerateLocation(t: dict) -> str:
     		proxy_temp_file_write_size 64k;
         }'''
         elif dirname == "ASPFrame":
-            location_str = '''        location /ASPFrame{
+            temp_location_str = '''        location /ASPFrame{
             proxy_connect_timeout 75s;
             proxy_read_timeout 60s;
             proxy_send_timeout 60s;
@@ -218,7 +218,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "EpointBI":
-            location_str = '''        location /EpointBI{
+            temp_location_str = '''        location /EpointBI{
             proxy_connect_timeout 75s;
             proxy_read_timeout 60s;
             proxy_send_timeout 60s;
@@ -226,7 +226,7 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         elif dirname == "EpointCBA":
-            location_str = '''        location /EpointCBA{
+            temp_location_str = '''        location /EpointCBA{
             proxy_connect_timeout 75s;
             proxy_read_timeout 60s;
             proxy_send_timeout 60s;
@@ -234,8 +234,8 @@ def ztbGenerateLocation(t: dict) -> str:
         }'''
 
         else:
-            location_str = location_str.format(dirname=dirname)
-        r_location_str += location_str
+            temp_location_str = location_str.format(dirname=dirname)
+        r_location_str += temp_location_str
 
     return r_location_str
 
