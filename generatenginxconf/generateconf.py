@@ -19,7 +19,7 @@ def praseUrl(url: list) -> dict:
         url = url.replace('\n', '')
         socket = re.search(
             r'((\d){1,3}\.){3}(\d){1,3}\:(\d+)', url).group(0)  # 获取ip和端口
-        dir_name = url.strip().replace(
+        dir_name = url.strip().rstrip('/').replace(
             'http://', '').split('/', 1)[1]  # 获取dirname
 
         if dir_name in upstream_dict:
