@@ -7,7 +7,7 @@
 解压包后，进入目录下，在url.txt中输入url，然后执行
 ```bash
 pip3 install flask
-python3 generateNginxConf.py
+nohup python3 app.py & #后台运行
 # windows环境下使用
 pip install flask
 python generateNginxConf.py

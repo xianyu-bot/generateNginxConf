@@ -20,14 +20,22 @@
                 <form method="post" id="url_post_form">
                     <div class="form-group">
                         <label for="url_str">Demo</label>
-                        <textarea name="url_str" form="url_post_form" class="form-control">
+                        <textarea name="url_str" form="url_post_form" class="form-control" rows="10">
 http://192.168.152.6:8080/dxpmanager
 http://192.168.152.23:8080/edc
 http://192.168.152.8:8080/sharedportal
                         </textarea>
-                        <input type="radio" name="project_type" id="非电子交易" value="非电子交易" checked> 非电子交易
-                        <input type="radio" name="project_type" id="电子交易" value="电子交易"> 电子交易
-                        <input type="submit" value="确认提交" class="form-control submit">
+                        <div class="radio-list">
+                            <label>
+                                <input type="radio" value="非电子交易" name="project_type" data-title="非电子交易" checked/> 非电子交易
+                            </label>
+                            <label>
+                                <input type="radio" value="电子交易" name="project_type" data-title="电子交易" /> 电子交易
+                            </label>
+                        </div>
+                        <!-- <input type="radio" name="project_type" id="非电子交易" value="非电子交易" checked> 非电子交易
+                        <input type="radio" name="project_type" id="电子交易" value="电子交易"> 电子交易 -->
+                        <input type="submit" value="确认提交" class="form-control submit"> 
                     </div>
                 </form>
             </div>
