@@ -15,12 +15,12 @@ http {
     client_max_body_size 0;
     #charset utf-8;
     vhost_traffic_status_zone;
-    log_format main '$time_local ^A $remote_addr ^A $request_method '
-    ^A '$request_uri ^A $uri ^A $request_time '
-    ^A '$status ^A  $body_bytes_sent '
-    ^A '$geoip2_data_country_name ^A $geoip2_data_subdivisions_name ^A $geoip2_data_city_name '
-    ^A '$http_referer ^A $upstream_addr ^A $upstream_response_time '
-    ^A '$http_user_agent ^A $http_x_forwarded_for';
+    log_format main '$time_local  $remote_addr:$remote_port  $request_method '
+                  '$request_uri  $uri  $request_time '
+                  '$status   $body_bytes_sent ' 
+                  '$geoip2_data_country_name  $geoip2_data_subdivisions_name  $geoip2_data_city_name '
+                  '$http_referer  $upstream_addr  $upstream_response_time ' 
+                  '$http_user_agent  $http_x_forwarded_for  $content_length';
 
     access_log  logs/access.log  main;
     sendfile        on;
