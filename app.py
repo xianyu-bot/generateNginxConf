@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,url_for,redirect,flash
+from flask import Flask,render_template,request,url_for,redirect,flash,send_from_directory
 from generatenginxconf.generateconf import startConf, ztbStartConf
 
 
@@ -18,6 +18,10 @@ def index():
 
     
     return render_template('index.html', str_nginx_conf=str_nginx_conf)
+
+@app.route('/download')
+def download():
+    return send_from_directory("./", "nginx.conf", as_attachment=True)
 
 
 if __name__ == '__main__':

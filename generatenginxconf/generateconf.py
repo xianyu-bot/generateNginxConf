@@ -277,7 +277,7 @@ def startConf(url_str: str):
         str_upstream, str_location, str_nginx_conf_head, str_nginx_conf_content, str_nginx_conf_tail)
 
     str_nginx_conf = formatNginxConf(str_nginx_conf)
-    # writeNginxConf(str_nginx_conf)
+    writeNginxConf(str_nginx_conf)
     # print(str_nginx_conf)
     return str_nginx_conf
 
@@ -291,6 +291,7 @@ def ztbStartConf(url_str: str):
         ztb_str_upstream, ztb_str_location, ztb_str_nginx_conf_head, ztb_str_nginx_conf_content, ztb_str_nginx_conf_tail)
 
     ztb_str_nginx_conf = formatNginxConf(ztb_str_nginx_conf)
+    writeNginxConf(ztb_str_nginx_conf)
     # writeNginxConf(str_nginx_conf)
     # print(str_nginx_conf)
     return ztb_str_nginx_conf
