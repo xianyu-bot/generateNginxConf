@@ -38,12 +38,17 @@ http://192.168.152.8:8080/sharedportal
                         <input type="submit" value="确认提交" class="form-control submit"> 
                     </div>
                 </form>
+            <div class="col-md-15">
+                <p class="p">1.在输入url时，如是默认端口，请添加80或443</p>
+                <p class="p">2.在输入url时，不要添加多级目录，目前只支持一级目录，即http://ip:port/xxx</p>
+                <p class="p">3.生成配置文件后，请勿通过ssh复制到单机版nginx.conf中，复制时，配置文件中的特殊字符会丢失。可通过下载按钮，下载对应的配置文件上传至服务器。</p>
+            </div>                
             </div>
             <div class="col-md-5 content">
                 <div class="content-body">
                     <a href="{{ url_for('download') }}" rel="external nofollow" class="btn btn-success"> 下载 </a>
                 </div>
-                
+         
 
                 <div id="code" class="code-box">
                     <pre>
