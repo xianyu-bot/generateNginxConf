@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/monokai-sublime.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font.css') }}">
     <script src="{{ url_for('static', filename='js/highlight.min.js') }}"></script>
 </head>
 
@@ -39,9 +40,10 @@ http://192.168.152.8:8080/sharedportal
                     </div>
                 </form>
             <div class="col-md-15">
-                <p class="p">1.在输入url时，如是默认端口，请添加80或443</p>
-                <p class="p">2.在输入url时，不要添加多级目录，目前只支持一级目录，即http://ip:port/xxx</p>
-                <p class="p">3.生成配置文件后，请勿通过ssh复制到单机版nginx.conf中，复制时，配置文件中的特殊字符会丢失。可通过下载按钮，下载对应的配置文件上传至服务器。</p>
+                <p class="font-warning">1.上面输入框中的3行url是示例，应用前请删除。</p>
+                <p class="font-warning">2.在输入url时，如是默认端口，请添加80或443</p>
+                <p class="font-warning">3.在输入url时，不要添加多级目录，目前只支持一级目录，例如：http://ip:port/TPFrame</p>
+                <p class="font-warning">4.生成配置文件后，请勿通过ssh复制文本至vi打开编辑的nginx.conf中。复制时，配置文件中的特殊字符会丢失。可通过下载按钮，下载对应的配置文件上传至服务器。</p>
             </div>                
             </div>
             <div class="col-md-5 content">
