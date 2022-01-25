@@ -35,7 +35,7 @@ def generateUpstream(t: dict) -> str:
     ''' 生成nginx配置文件中upstream块 '''
     r_upstream = ''
     temp = "upstream {dirname} {{ keepalive 1024; {server_str} }}"
-    server_str = "server {socket} ;\n"
+    server_str = "server {socket};\n"
     for dirname in t:
         temp_str = ""
         for i in t[dirname]:
